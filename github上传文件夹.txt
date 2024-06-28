@@ -1,0 +1,7 @@
+git clone + 你的仓库地址
+cd  +远程仓库文件夹名
+将要上传的文件放进文件夹
+git init
+git add .
+git commit -m "你的提交信息"
+git push
