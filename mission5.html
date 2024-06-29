@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>倒计时轮播</title>
+  <style>
+    #countdown {
+      font-size: 24px;
+      text-align: left;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown"></div>
+
+  <script>
+    // 设置初始倒计时
+    let seconds = 10;
+
+    // 更新倒计时显示
+    function updateCountdown() {
+      document.getElementById('countdown').innerHTML += `<div>倒计时：${seconds}秒</div>`;
+      seconds--;
+      if (seconds < 0) {
+        clearInterval(interval);
+      }
+    }
+
+    // 每秒更新一次倒计时
+    const interval = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
