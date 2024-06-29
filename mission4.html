@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <style>
+        ul{
+    list-style-type: none;
+    margin: 0 0;
+    padding: 0;
+}
+.days{
+    width: 100%;
+    background: red;
+}
+li{
+    width: 10%;
+    height: 40px;
+    display: flex;
+    float: left;
+    background: rgb(22, 221, 178);
+    color: rgb(255,255,255);
+    margin: 3px 3px 30px 30px;
+}
+    </style>
+</head>
+<body>
+    <h3>简易日历：</h3>
+    <label for="month">选择月份</label>
+    <select name="month" id="">
+        <option value=""></option>
+        <option value="January">一月</option>
+        <option value="February">二月</option>
+        <option value="March">三月</option>
+        <option value="April">四月</option>
+        <option value="May">五月</option>
+        <option value="June">六月</option>
+        <option value="July">七月</option>
+        <option value="August">八月</option>
+        <option value="September">九月</option>
+        <option value="October">十月</option>
+        <option value="November">十一月</option>
+        <option value="December">十二月</option>
+    </select>
+
+    <h1>Month</h1>
+
+    <!-- add days list -->
+    <div class="days">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+            <li>21</li>
+            <li>22</li>
+            <li>23</li>
+            <li>24</li>
+            <li>25</li>
+            <li>26</li>
+            <li>27</li>
+            <li>28</li>
+            <li class="nov">29</li>
+            <li class="nov">30</li>
+            <li class="nov thirty">31</li>
+        </ul>
+    </div>
+
+    <script>
+        let heading = document.getElementsByTagName("h1");
+let userChoice = document.getElementsByTagName("select");
+let daysBoxes = document.querySelector(".days")
+const months31 = ['January', 'March', 'May', 'July', 'August', 'October', 'Decemenber'];
+const months30 = ['November', 'April', 'June', 'September'];
+const months28 = ['February'];
+
+
+/* turn off the days display at first */
+daysBoxes.style.display = "none"
+
+/* change heading to selected month */
+ userChoice[0].onchange = function(){
+     heading[0].textContent = userChoice[0].value;
+
+    /* selectively display day boxes */
+    if (userChoice[0].value === months28[0]){
+        daysBoxes.style.display = "none";
+        display28();
+    } else {
+        for(let ii = 0; ii < months31.length; ii++){
+            if(userChoice[0].value === months31[ii]){
+                daysBoxes.style.display = "none"
+                display31();
+                break;
+            }
+        }
+        for(let ii = 0; ii < months30.length; ii++){
+            if(userChoice[0].value === months30[ii]){
+                daysBoxes.style.display = "none"
+                display30();
+            }
+        }
+    }
+ }
+
+ function display30(){
+    daysBoxes.style.display = "block";
+    let novMonths = document.querySelectorAll(".nov");
+    for (let nn = 0; nn < novMonths.length; nn++){
+        novMonths[nn].style.display = "block";
+    }
+    document.querySelectorAll("li")[30].style.display = "none";
+ }
+ function display31(){
+    daysBoxes.style.display = "block";
+    let novMonths = document.querySelectorAll(".nov");
+    for (let nn = 0; nn < novMonths.length; nn++){
+        novMonths[nn].style.display = "block";
+    }
+ }
+ function display28(){
+    daysBoxes.style.display = "block";
+    let novMonths = document.querySelectorAll(".nov");
+    for (let nn = 0; nn < novMonths.length; nn++){
+        novMonths[nn].style.display = "none";
+    }
+ }
+
+
+    </script>
+</body>
+</html>
