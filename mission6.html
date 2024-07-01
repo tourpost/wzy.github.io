@@ -67,13 +67,13 @@
     }
 
     .show #inputBlock {
-      height: 50px;
+      height: 70px;
     }
 
     .show #inputBlock #stack1 {
       font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
       font-weight: bold;
-      line-height: 50px;
+      line-height:10px;
       bottom: 0px;
     }
 
@@ -86,17 +86,7 @@
       color: #0066cc;
     }
   </style>
-  <script type="text/javascript">
-    // 显示你按下的按钮
-    //  1. 获得按下的按钮
-    var btns =document.querySelectorAll('.digit');
-    //  2. 绑定点击事件
-    function foo(content) {
   
-    // 显示input中的内容
-    document.querySelector('.inputBlock').innerHTML =content;
-  }
-  </script>
 </head>
 
 <body>
@@ -105,36 +95,74 @@
     <div class="show">
       <input type="text" id="formula">
       <div class="OutputBlock"></div>
-      <div class="inputBlock"></div>
+      <div id="inputBlock"><span id="stack1"></span></div>
     </div>
     <div class="panel clearfix">
-			<div class="digit" onclick="foo(this.innerHTML)">NEG</div>
-			<div class="digit" onclick="foo(this.innerHTML)">CE</div>
-			<div class="digit" onclick="foo(this.innerHTML)">C</div>
-			<div class="digit" onclick="foo(this.innerHTML)">NEW</div>
-			<div class="digit" onclick="foo(this.innerHTML)">/</div>
-			<div class="digit" onclick="foo(this.innerHTML)">PI</div>
-			<div class="digit" onclick="foo(this.innerHTML)">7</div>
-			<div class="digit" onclick="foo(this.innerHTML)">8</div>
-			<div class="digit" onclick="foo(this.innerHTML)">9</div>
-			<div class="digit" onclick="foo(this.innerHTML)">*</div>
-			<div class="digit" onclick="foo(this.innerHTML)">n!</div>
-			<div class="digit" onclick="foo(this.innerHTML)">4</div>
-			<div class="digit" onclick="foo(this.innerHTML)">5</div>
-			<div class="digit" onclick="foo(this.innerHTML)">6</div>
-			<div class="digit" onclick="foo(this.innerHTML)">-</div>
-			<div class="digit" onclick="foo(this.innerHTML)">ANS</div>
-			<div class="digit" onclick="foo(this.innerHTML)">1</div>
-			<div class="digit" onclick="foo(this.innerHTML)">2</div>
-			<div class="digit" onclick="foo(this.innerHTML)">3</div>
-			<div class="digit" onclick="foo(this.innerHTML)">+</div>
-			<div class="digit" onclick="foo(this.innerHTML)">(</div>
-			<div class="digit" onclick="foo(this.innerHTML)">)</div>
-			<div class="digit" onclick="foo(this.innerHTML)">0</div>
-			<div class="digit" onclick="foo(this.innerHTML)">.</div>
-			<div class="digit" onclick="foo(this.innerHTML)">=</div>
+			<div class="digit">NEG</div>
+			<div class="digit">CE</div>
+			<div class="digit">C</div>
+			<div class="digit">NEW</div>
+			<div class="digit">/</div>
+			<div class="digit">PI</div>
+			<div class="digit">7</div>
+			<div class="digit">8</div>
+			<div class="digit">9</div>
+			<div class="digit">*</div>
+			<div class="digit">n!</div>
+			<div class="digit">4</div>
+			<div class="digit">5</div>
+			<div class="digit">6</div>
+			<div class="digit">-</div>
+			<div class="digit">ANS</div>
+			<div class="digit">1</div>
+			<div class="digit">2</div>
+			<div class="digit">3</div>
+			<div class="digit">+</div>
+			<div class="digit">(</div>
+			<div class="digit">)</div>
+			<div class="digit">0</div>
+			<div class="digit">.</div>
+			<div class="digit">=</div>
     </div>
   </div>
+
+  <script type="text/javascript">
+   
+    // 显示你按下的按钮
+    //  1. 获得按下的按钮
+    var btns =document.querySelectorAll('.digit');
+    //  2. 绑定点击事件
+    for (var i=0; i< btns.length; i ++){
+      btns[i].addEventListener('click',(event) =>{
+        foo(event,stack1)
+      });
+    }
+    init()
+    renderoutput(stack1.join(""))
+    // 显示input中的内容
+    function foo(event){
+      if(event.target.innerHTML == "C" || event.target.innerHTML == "CE") {
+        renderoutput(0);
+        init();
+      } else{
+        if (stack1.length == 1 && stack1[0]=='0'){
+          stack1.pop();
+        }
+      stack1.push(event.target.innerHTML);
+        //展示算式
+     renderoutput(stack1.join(""));
+  }
+
+}
+// 渲染输出
+  function renderoutput(content){
+    document.querySelector('#stack1').innerHTML = content;
+  }
+// 初始化输出
+  function init(){
+    stack1=[0];
+  }
+  </script>
 </body>
 
 
