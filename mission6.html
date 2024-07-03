@@ -13,7 +13,7 @@
     .calc .panel .digit {
       margin: 0 auto;
     }
-
+ 
     .calc .panel .digit {
       text-align: center;
     }
@@ -172,7 +172,7 @@
       console.log('stack1', stack1);
       renderOutput1(stack1);
       // console.log('结果是', ans);
-      op = '=';
+      op = event.target.innerHTML == '+' || event.target.innerHTML == '-' || event.target.innerHTML == '*' || event.target.innerHTML == '/' ;
     }
     else {
       // 如果按了 + - * / 中的一个
@@ -195,7 +195,7 @@
           init1();
         } else {
           if (op == '=') {
-            stack2 = ans.toString().split('');
+            stack2 = sta1
             op = event.target.innerHTML;
             init1();
             renderOutput();
@@ -264,6 +264,39 @@
   function toNum(arr) {
     return parseInt(arr.join(''));
   }
+// 点击NEW按钮出现随机算式
+document.querySelector(".digit:nth-child(4)").addEventListener('click', () => {
+  // 生成随机数字
+  var num1 = Math.floor(Math.random() * 10);
+  var num2 = Math.floor(Math.random() * 10);
+  // 生成随机操作符
+  var operators = ['+', '-', '*', '/'];
+  var randomOperator = operators[Math.floor(Math.random() * operators.length)];
+  // 将随机算式显示在输入框
+  document.querySelector("#stack1").innerHTML = num1 + randomOperator + num2;
+  
+  // 随机生成一个结果
+  var result;
+  switch(randomOperator) {
+    case '+':
+      result = num1 + num2;
+      break;
+    case '-':
+      result = num1 - num2;
+      break;
+    case '*':
+      result = num1 * num2;
+      break;
+    case '/':
+      result = num1 / num2;
+      break;
+  }
+  
+
+  
+  // 将结果显示在stack2中
+  document.querySelector("#stack2").innerHTML = result;
+});
 </script>
 
 </html>
